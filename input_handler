@@ -1,0 +1,31 @@
+import pydirectinput
+import time
+
+class InputHandler:
+    def __init__(self):
+        pydirectinput.PAUSE = 0.1  # Small pause between actions
+
+    def press_key(self, key, duration=None):
+        """Presses a key. If duration is set, holds it."""
+        try:
+            if duration:
+                pydirectinput.keyDown(key)
+                time.sleep(duration)
+                pydirectinput.keyUp(key)
+            else:
+                pydirectinput.press(key)
+        except Exception as e:
+            print(f"Error pressing key {key}: {e}")
+
+    def key_down(self, key):
+        pydirectinput.keyDown(key)
+
+    def key_up(self, key):
+        pydirectinput.keyUp(key)
+
+    def click_mouse(self, x, y, button='left'):
+        """Clicks the mouse at specific coordinates."""
+        try:
+            pydirectinput.click(x=x, y=y, button=button)
+        except Exception as e:
+            print(f"Error clicking mouse at {x}, {y}: {e}")
